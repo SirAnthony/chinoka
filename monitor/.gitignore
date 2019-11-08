@@ -1,0 +1,12 @@
+# eclipse
+Debug/
+Release/
+.settings/
+# stm
+Drivers/
+# ac6
+LinkerScript.ld
+# cube
+EWARM/
+*.ioc
+.mxproject
