@@ -25,6 +25,7 @@
 /* USER CODE BEGIN Includes */
 
 #include "stm32f10x_dbgmcu.h"
+#include "timer.h"
 #include "modules/led.h"
 
 /* USER CODE END Includes */
@@ -89,6 +90,8 @@ int main(void)
 
   /* USER CODE BEGIN SysInit */
 
+  TimerInit();
+
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -97,7 +100,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   Led_Init();
-  Led_blink(10, 1000);
+  HAL_Delay(Led_blink(2, 200));
 
   /* USER CODE END 2 */
 
@@ -110,7 +113,8 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    Led_Cycle(tick);
+    Led_blink(1, 500);
+    HAL_Delay(500);
   }
   /* USER CODE END 3 */
 }

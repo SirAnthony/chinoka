@@ -1,4 +1,8 @@
+#ifndef MOD_LED_H_
+#define MOD_LED_H_
+
 
 void Led_Init();
-void Led_Cycle(int ts);
-void Led_blink(int count, int delay);
+int Led_blink(int count, int delay);
+
+#endif /* MOD_LED_H_ */

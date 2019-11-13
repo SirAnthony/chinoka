@@ -4,19 +4,17 @@
  */
 
 #include "main.h"
+#include "timer.h"
 #include "led.h"
 
 typedef enum {
-  idle = 0,
-  wait_on,
+  wait_on = 0,
   wait_off,
   wait_cycle,
   done,
 } Led_States;
 
 typedef struct {
-  int last_tick;
-  int next_tick;
   int delay;
   int count;
   int repeat;
@@ -33,41 +31,36 @@ void Led_Init()
   builtin_led.Pin = GPIO_PIN_13;
   builtin_led.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &builtin_led);
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
 }
 
-void Led_Cycle(int ts)
+void led_cycle(int repeat)
 {
-  state.last_tick = ts;
-  if (state.last_tick<state.next_tick)
-    return;
   switch (state.state){
   case done:
-    state.state = idle;
-    // no break
-  case idle:
     return;
   case wait_on:
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
     break;
   case wait_off:
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
     break;
   case wait_cycle:
     HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-    state.count++;
-    if (state.count > state.repeat)
-    {
-      state.state = done;
-      return;
-    }
-    state.next_tick = state.next_tick+state.delay;
   }
+  state.count++;
+  if (!repeat)
+      state.state = done;
 }
 
-void Led_blink(int count, int delay){
+int Led_blink(int count, int delay)
+{
   state.state = wait_cycle;
   state.repeat = count*2;
   state.delay = delay;
-  state.next_tick = state.last_tick+delay;
+  // Reset led
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
+  TimerSetup(&led_cycle, state.delay, state.repeat);
+  return state.repeat*state.delay;
 }
 
