@@ -1,10 +1,3 @@
-/*
- * bmp280.h
- *
- *  Created on: Nov 14, 2019
- *      Author: sergey
- */
-
 #ifndef BMP280_H_
 #define BMP280_H_
 
