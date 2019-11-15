@@ -221,6 +221,11 @@ static void MX_USART1_UART_Init(void)
   }
   /* USER CODE BEGIN USART1_Init 2 */
 
+  GPIO_InitTypeDef uart_st;
+  uart_st.Mode = GPIO_MODE_INPUT;
+  uart_st.Pin = GPIO_PIN_8;
+  HAL_GPIO_Init(GPIOA, &uart_st);
+
   /* USER CODE END USART1_Init 2 */
 
 }
@@ -243,6 +248,9 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
+int uart_print_disable;
+unsigned char rx_buffer[3];
+
 /**
   * @brief  Retargets the C library printf function to the USART.
   * @param  None
@@ -251,9 +259,8 @@ static void MX_GPIO_Init(void)
 PUTCHAR_PROTOTYPE
 {
 #if defined(HAL_UART_MODULE_ENABLED) && defined(UART_PRINTF)
-
-  /* Place your implementation of fputc here */
-  /* e.g. write a character to the USART1 and Loop until the end of transmission */
+  if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_8) == GPIO_PIN_RESET)
+    return ch;
   HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
 #endif /* UART_PRINTF */
   return ch;

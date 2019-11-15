@@ -10,3 +10,5 @@ LinkerScript.ld
 EWARM/
 *.ioc
 .mxproject
+# secrets
+esp/config.lua
