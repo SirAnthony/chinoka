@@ -18,7 +18,7 @@ function send_level(metric, level)
     connect(CONFIG.MONITOR, function(sock)
         local str = string.format("monitor.%s %s %d", metric, level, ts);
         sock:on('sent', function()
-            -- print("Sent '" .. str .. "'")
+            print("Sent '" .. str .. "'")
             blink(1, 50)
             sock:close()
             collectgarbage()

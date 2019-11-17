@@ -60,7 +60,7 @@ int Led_blink(int count, int delay)
   state.delay = delay;
   // Reset led
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
-  TimerSetup(&led_cycle, state.delay, state.repeat);
+  TimerSetup(TIMER_TIM2, &led_cycle, state.delay, state.repeat);
   return state.repeat*state.delay;
 }
 
