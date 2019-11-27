@@ -17,4 +17,9 @@
 #define DHT_GPIO_PIN     GPIO_PIN_15
 #define DHT_MOD_DELAY    2000U
 
+// MQ
+#define MQ_GPIO_PIN     A1
+#define MQ_ZERO_VAL     200
+#define MQ_MOD_DELAY    10000U
+
 #endif /* DEFINE_H_ */

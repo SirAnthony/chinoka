@@ -43,7 +43,7 @@ void DHT_Init(void)
   tim_struct.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   tim_struct.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   tim_struct.Init.Period = 65535;
-  tim_struct.Init.Prescaler = 71000;
+  tim_struct.Init.Prescaler = (SystemCoreClock / 1000U) - 1;
   if (HAL_TIM_Base_Init(&tim_struct) != HAL_OK)
     Error_Handler();
   sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
@@ -75,7 +75,7 @@ uint32_t DHT22_GetReadings(DHTxData *out) {
 
   // Wait for AM2302 to begin communication (20-40us)
   DHT_DELAY_TIM->CNT = 0;
-  while (((c = DHT_DELAY_TIM->CNT) < 900)
+  while (((c = DHT_DELAY_TIM->CNT) < 10000)
     && (DHT_GPIO_PORT->IDR & DHT_GPIO_PIN));
   DHT_DELAY_TIM->CNT = 0;
   if (c >= 100)

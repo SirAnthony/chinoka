@@ -4,6 +4,7 @@
 #include "modules/led.h"
 #include "modules/bmp280.h"
 #include "modules/dht22.h"
+#include "modules/mq.h"
 #include <stdio.h>
 
 #ifdef __GNUC__
@@ -61,6 +62,7 @@ void User_Init()
   HAL_Delay(Led_blink(2, 200));
   BMP_Init();
   DHT_Init();
+  MQ_Init();
 }
 
 uint32_t last_tick = 0;
@@ -73,6 +75,7 @@ void User_Loop(uint32_t tick)
   }
   BMP_Loop(tick);
   // DHT_Loop(tick);
+  MQ_Loop(tick);
 }
 
 
