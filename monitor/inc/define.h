@@ -8,7 +8,7 @@
 #define BMP_LD4_GPIO_Port  GPIOC
 #define BMP_LD3_Pin        GPIO_PIN_9
 #define BMP_LD3_GPIO_Port  GPIOC
-#define BMP_MOD_DELAY      2000U
+#define BMP_MOD_DELAY      5000U
 
 // DHT
 #define DHT_GPIO_PORT    GPIOA
@@ -19,6 +19,10 @@
 
 // MQ
 #define MQ_GPIO_PIN     A1
+// Board resistance
+#define MQ_RL_VAL       15
+//RO_CLEAR_AIR_FACTOR=(Sensor resistance in clean air)/RO
+#define MQ_R0_VAL       9.3
 #define MQ_ZERO_VAL     200
 #define MQ_MOD_DELAY    10000U
 

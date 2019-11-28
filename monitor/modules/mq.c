@@ -3,6 +3,12 @@
 #include "user.h"
 #include "define.h"
 #include "mq.h"
+#include <math.h>
+
+// Some info about mq sensors:
+// http://davidegironi.blogspot.com/2014/01/cheap-co2-meter-using-mq135-sensor-with.html
+// http://sandboxelectronics.com/?p=165
+float COCurve[3] = {2.3, 0.72, -0.34}; // mq2 data from above
 
 typedef struct {
   volatile float ppm;
@@ -28,6 +34,7 @@ void MQ_Init()
 {
   sdata_mq.tick = 0;
   sdata_mq.state = MOD_STATE_DELAY;
+  printf("MQ module init\n");
 }
 
 void MQ_Loop(uint32_t tick)
@@ -54,7 +61,12 @@ void MQ_Loop(uint32_t tick)
     sdata_mq.tick = tick + MQ_MOD_DELAY;
     sdata_mq.state = MOD_STATE_DELAY;
     // I have no idea how it should be interpreted
-    sdata_mq.ppm = ( sdata_mq.read / 4096.0 ) * 3300.0;
+    // 4096  - stm32 has a 12 bit ADC
+    //float voltage = ( 4096.0 - sdata_mq.read ) / sdata_mq.read * MQ_RL_VAL;
+    //float rs = ( ( 5.0 - voltage ) / voltage ) * MQ_RL_VAL;
+    double rs = ( 4096.0 - sdata_mq.read ) / sdata_mq.read * MQ_RL_VAL;
+    double ratio = rs / MQ_R0_VAL;
+    sdata_mq.ppm = pow(10, (log10(ratio) - COCurve[1]) / COCurve[2] + COCurve[0]);
     if (sdata_mq.ppm>200)
       print_metric("mq4.co", sdata_mq.ppm);
     break;
