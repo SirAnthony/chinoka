@@ -74,7 +74,7 @@ void User_Loop(uint32_t tick)
     Led_blink(1, 100);
   }
   BMP_Loop(tick);
-  // DHT_Loop(tick);
+  DHT_Loop(tick);
   MQ_Loop(tick);
 }
 

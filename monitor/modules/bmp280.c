@@ -23,24 +23,6 @@ uint32_t last_tick;
 
 void BMP_Init()
 {
-  GPIO_InitTypeDef GPIO_InitStruct;
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, BMP_LD4_Pin|BMP_LD3_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = BMP_B1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_EVT_RISING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(BMP_B1_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : PCPin PCPin */
-  GPIO_InitStruct.Pin = BMP_LD4_Pin|BMP_LD3_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
   bmp280_init_default_params(&sdata_bmp.handle.params);
   sdata_bmp.handle.addr = BMP280_I2C_ADDRESS_0;
   sdata_bmp.handle.i2c = &hi2c1;

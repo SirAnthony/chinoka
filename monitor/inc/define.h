@@ -11,10 +11,10 @@
 #define BMP_MOD_DELAY      5000U
 
 // DHT
-#define DHT_GPIO_PORT    GPIOA
+#define DHT_GPIO_PORT    GPIOB
 // #define DHT_GPIO_CLOCK   RCC_APB2Periph_GPIOB
 #define DHT_DELAY_TIM    TIM3
-#define DHT_GPIO_PIN     GPIO_PIN_15
+#define DHT_GPIO_PIN     GPIO_PIN_8
 #define DHT_MOD_DELAY    2000U
 
 // MQ
@@ -25,5 +25,8 @@
 #define MQ_R0_VAL       9.3
 #define MQ_ZERO_VAL     200
 #define MQ_MOD_DELAY    10000U
+
+// MHZ
+#define MHZ_UART 1
 
 #endif /* DEFINE_H_ */

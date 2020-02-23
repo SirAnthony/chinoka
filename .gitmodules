@@ -1,6 +1,3 @@
 [submodule "monitor/modules/BMP280_STM32"]
 	path = monitor/modules/BMP280_STM32
 	url = https://github.com/ciastkolog/BMP280_STM32.git
-[submodule "monitor/modules/stm32f1_HAL_DHT22"]
-	path = monitor/modules/stm32f1_HAL_DHT22
-	url = https://github.com/MysticChan/stm32f1_HAL_DHT22.git
