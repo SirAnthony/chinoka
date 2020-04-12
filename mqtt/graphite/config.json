@@ -1,0 +1,12 @@
+{
+    "cid": "server",
+    "reconnect": 5,
+    "mqtt": {
+        "host": "127.0.0.1",
+        "port": "1883"
+    },
+    "graphite": {
+        "host": "127.0.0.1",
+        "port": 2003
+    }
+}

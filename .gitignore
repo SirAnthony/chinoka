@@ -31,6 +31,9 @@
 *.out
 *.app
 
-# vim 
+# vim
 *.swp
 *.swo
+
+#python
+*.pyc

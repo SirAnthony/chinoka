@@ -1,0 +1,19 @@
+{
+    "test/mosquitto/messages/load/received": "n",
+    "test/mosquitto/messages/load/#": "n",
+    "test/jp/j1": "n",
+    "$SYS/broker/load/messages/received/1min": {
+        "type": "n",
+        "topic": "test.mosquitto.messages.load.received"
+    },
+    "$SYS/broker/load/messages/sent/1min": {
+        "type": "n",
+        "topic": "test.mosquitto.messages.load.sent"
+    },
+    "sensor/temperature/room": {
+        "type": "n",
+        "topic": "homeautomation.#"
+    },
+    "test/jp/j2": "j",
+    "test/jp/j3": "j"
+}
