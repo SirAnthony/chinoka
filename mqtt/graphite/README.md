@@ -2,6 +2,7 @@
 mqtt2graphite
 =============
 
+MQTT proxy to send data to graphite.
 Change `config.json` for basic configuration, `map.json` for mqtt
 subscriptions setup. Run by:
 
