@@ -17,16 +17,20 @@ Each key represent channel name. MQTT wildcards (#) are allowed.
 Value can be string representing payload type, or object in case
 of additional config required.
 
-Payload types (key `type`):
-n - payload contains a number
-j - payload is JSON. Extract all keys with numeric values
+type
 
-Optional options:
+> Payload types:
+> - n - payload contains a number
+> - j - payload is JSON. Extract all keys with numeric values
+
+#### Optional options:
+
 topic
-    The MQTT topic is to be mapped to this key in Carbon (Graphite)
-    Periods used as separators. If not specified, the MQTT topic name
-    will be used (slashes replaced with dots). Hash (#) character will
-    be replaced by the MQTT topic name.
+
+> The MQTT topic is to be mapped to this key in Carbon (Graphite)
+> Periods used as separators. If not specified, the MQTT topic name
+> will be used (slashes replaced with dots). Hash (#) character will
+> be replaced by the MQTT topic name.
 
 Config
 ------
