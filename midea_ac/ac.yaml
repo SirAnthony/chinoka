@@ -1,0 +1,72 @@
+esphome:
+  name: midea-ac
+
+esp8266:
+  board: esp12e
+
+# Enable logging
+logger:
+  baud_rate: 0
+
+# Enable Home Assistant API
+api:
+  password: "42"
+
+ota:
+  password: "42"
+
+wifi:
+  ssid: ""
+  password: ""
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Midea Ac Fallback Hotspot"
+    password: "U4ZeTSxGvhX0"
+
+captive_portal:
+    
+
+uart:
+  tx_pin: 1
+  rx_pin: 3
+  baud_rate: 9600
+
+climate:
+  - platform: midea
+    name: Midea Climate
+    period: 1s
+    timeout: 2s
+    num_attempts: 3
+    autoconf: true
+    beeper: true
+    visual:
+      min_temperature: 17 °C    # min: 17
+      max_temperature: 30 °C    # max: 30
+      temperature_step: 0.5 °C  # min: 0.5
+    # supported_modes:            # Optional. All capabilities in this section may be detected by autoconf.
+    #   - FAN_ONLY
+    #   - HEAT_COOL
+    #   - COOL
+    #   - HEAT
+    #   - DRY
+    custom_fan_modes:           # Optional
+      - SILENT
+      - TURBO
+    # supported_presets:          # Optional. All capabilities in this section may be detected by autoconf.
+    #   - ECO
+    #   - BOOST
+    #   - SLEEP
+    # custom_presets:             # Optional. All capabilities in this section may be detected by autoconf.
+    #   - FREEZE_PROTECTION
+    supported_swing_modes:      # Optional
+      - VERTICAL
+      - HORIZONTAL
+      - BOTH
+    outdoor_temperature:        # Optional. Outdoor temperature sensor (may display incorrect values after long inactivity).
+      name: Temp
+    # power_usage:                # Optional. Power usage sensor (only for devices that support this feature).
+    #   name: Power
+    # humidity_setpoint:          # Optional. Indoor humidity sensor (only for devices that support this feature).
+    #   name: Humidity
+
